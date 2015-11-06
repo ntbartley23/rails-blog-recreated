@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Fname:</strong>
+  <%= @user.fname %>
+</p>
+
+<p>
+  <strong>Lname:</strong>
+  <%= @user.lname %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @user.email %>
+</p>
+<p>
+	<strog>Password:</strog>
+	<%= @user.password %>
+</p>
+<p>
+ <strong>Posts associated with this user:</strong><br><br>
+ <% @posts.each do |post| %>
+ <%= post.content %><br>
+
+ <% end %>
+</p>
+<%= link_to 'Edit', edit_user_path(@user) %> |
+<%= link_to 'Back', users_path %>
+
+
