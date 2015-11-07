@@ -9,8 +9,16 @@ class PostsController < ApplicationController
   end
 
   def create
-    
+    @post = Post.new(post_params)
+     if @post.save 
+      flash[:notice] = " Post saved"
+       redirect_to user_post_path(params[:user_id], @post)
+      else 
+      flash[:notice] = " Post Error"
+      end 
+
   end
+
 
   def edit
   end
@@ -37,4 +45,10 @@ end
   end
  redirect_to :back
 end
-end
+
+
+private
+  def post_params
+  params.require(:post).permit(:content, :title)
+  end
+ end 

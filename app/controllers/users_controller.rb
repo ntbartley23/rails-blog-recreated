@@ -5,6 +5,8 @@ class UsersController < ApplicationController
   end
 
   def show
+    # apple.posts
+    @posts = @user.posts
   end
 
   def new
