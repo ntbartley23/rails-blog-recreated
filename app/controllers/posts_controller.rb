@@ -2,6 +2,7 @@ class PostsController < ApplicationController
 
   def index
     @post = Post.all
+
   end
 
   def new
@@ -9,7 +10,8 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Post.new(post_params)
+    @post = Post.new post_params
+    @post.user_id = current_user.id
      if @post.save 
       flash[:notice] = " Post saved"
        redirect_to user_post_path(params[:user_id], @post)

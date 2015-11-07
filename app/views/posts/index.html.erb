@@ -1,1 +1,10 @@
+<% @post.each do |post| %>
+<p>
+	<%=post.content %>
 
+</p>
+<% if post.user %>
+ Written by: 
+  <%=post.user.username %>
+<% end %>
+<% end %>
