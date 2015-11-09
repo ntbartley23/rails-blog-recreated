@@ -14,11 +14,14 @@
  *= require_self
  */
 
-.navbar {
+
+.wrapper {
+
+	background-color: #9faeb8;
+	font-size: 20px;	
 
 }
 
-
-.wrapper {
-	
+body {	
+	background-image: url("artist.jpg")
 }

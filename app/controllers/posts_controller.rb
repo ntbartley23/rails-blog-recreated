@@ -11,12 +11,13 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new post_params
-    @post.user_id = current_user.id
+    @post.user_id = current_user.id 
      if @post.save 
       flash[:notice] = " Post saved"
-       redirect_to user_post_path(params[:user_id], @post)
+       redirect_to user_posts_path([:user_id], @post)
       else 
       flash[:notice] = " Post Error"
+      render :back
       end 
 
   end
