@@ -4,8 +4,9 @@ Rails.application.routes.draw do
    root 'users#index' 
     get "profile" => "users#show"
     get "/users/sign_in" => "sessions#new"
-    post "users/sign_in" => "sessions#create"
-    get "/user/sign_out" => "sessions#destroy"
+    post "users/sign_in" => "users#show"
+    # get "/user/sign_out" => "sessions#destroy"
+    # get "user/posts" => "posts#show"
 
    resources :users do
     resources :sessions

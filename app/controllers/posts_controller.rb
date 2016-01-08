@@ -1,26 +1,29 @@
 class PostsController < ApplicationController
 
   def index
-    @post = Post.all
+    @post = Post.order(id: :desc)
 
   end
 
-  def new
-    @post = Post.new
+ def new
+    unless current_user
+      flash[:alert] = "you must log in to create a post"
+      redirect_to(:back)
+    else
+      @post = Post.new
+    end
   end
 
-  def create
-    @post = Post.new post_params
-    @post.user_id = (post_params)
-     if @post.save 
-      flash[:notice] = " Post saved"
-       redirect_to user_posts_path([:user_id], @post)
-      else 
-      flash[:notice] = " Post Error"
-      render :back
-      end 
+ 
 
-  end
+    def create
+      
+      @post = current_user.posts.create post_params
+       redirect_to user_post_path(params[:user_id], @post)
+      
+   end 
+
+    
 
 
   def edit
@@ -36,7 +39,7 @@ class PostsController < ApplicationController
   redirect_to :back
 end
   def show
-    @post = Post.find(params[:id])
+    @post = Post.find(params[:id], @post)
   end
 
   def destroy

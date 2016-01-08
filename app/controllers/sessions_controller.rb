@@ -13,7 +13,8 @@ end
 
  #find the user
   @user = User.where(username: username).first
-  if@user.nil?
+
+  if @user.nil?
     flash[:alert] = "Not a user"
     redirect_to :back
 
@@ -21,9 +22,8 @@ end
   else
      if @user.password == password
       session[:user_id] = @user.id
-      redirect_to root_path
-    else
-      redirect_to profile_path
+      flash[:alert] = "Welcome"
+      redirect_to user_path(@user)
     end 
   end
  end

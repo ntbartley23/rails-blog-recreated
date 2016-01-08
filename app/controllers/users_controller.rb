@@ -1,21 +1,32 @@
 class UsersController < ApplicationController
- before_action :set_user, only: [:show, :edit, :update, :destroy]
-
-  def index
-  end
-
-  def show
-    # apple.posts
-    @posts = @user.posts
-  end
 
   def new
     @user = User.new
   end
 
+  def index
+    @users = User.all
+  end
+
+  
+    def show
+   if params[:id]
+     @user = User.find(params[:id])
+    else
+     redirect_to users_path unless current_user.present?
+     @user = current_user
+   end
+ end
+
+
+    
+
+ 
+
   def create
     @user = User.new(user_params)
     if @user.save
+      session[:user_id] = @user.id
       flash[:notice] = "User successfully created"
       redirect_to user_path(@user)
      else
@@ -43,9 +54,6 @@ class UsersController < ApplicationController
 end
 
 private
-def set_user
-  @user = User.find(params[:id])
-end
 
 def user_params
   params.require(:user).permit(:fname, :lname, :email, :password, :username)
